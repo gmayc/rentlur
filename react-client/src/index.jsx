@@ -163,7 +163,7 @@ class App extends React.Component {
           <Route exact path='/' render={(props) => { 
             return (
               <div>
-                <Search {...props} search={this.searchProperties}/>
+                {/* <Search {...props} search={this.searchProperties}/> */}
                 <List {...props} retrieve={this.retrieveDetails} details={this.state.details} rentals={this.state.rentals} fav={this.addFavorite} username={this.state.username}/>
               </div>
             )
