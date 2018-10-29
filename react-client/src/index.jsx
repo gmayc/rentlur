@@ -51,7 +51,7 @@ class App extends React.Component {
     this.searchProperties = this.searchProperties.bind(this);
     this.retrieveDetails = this.retrieveDetails.bind(this);
     this.login = this.login.bind(this);
-    this.signup = this.signup.bind(this);
+    // this.signup = this.signup.bind(this);
     this.logout = this.logout.bind(this);
     this.addFavorite = this.addFavorite.bind(this);
     this.retrieveFavorites = this.retrieveFavorites.bind(this);
@@ -82,7 +82,8 @@ class App extends React.Component {
         username: response.data.data.username,
         userId: response.data.data.id
       })
-      return alert('Logged In Successfully!')
+      alert('Logged In Successfully!');
+      
     })
     .catch((err) => alert('Incorrect username or password'));
   }
