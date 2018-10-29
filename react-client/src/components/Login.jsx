@@ -45,13 +45,14 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className='usr-pss'>
+      <div className='login-block'>
       <form onSubmit={this.handleSubmit}>
+      <div className='login-sign'>Login</div>
         <div>
-          username: <input type='username' value={this.state.username} onChange={this.onUserChange} placeholder='username'/>
+          <input type='username' value={this.state.username} onChange={this.onUserChange} placeholder='username'/>
         </div>
         <div>
-          password: <input type= "password" value={this.state.password} onChange={this.onPassChange} placeholder='password'/>
+          <input type= "password" value={this.state.password} onChange={this.onPassChange} placeholder='password'/>
         </div>
         <input className='log-in-submit' type='submit' value='Submit'/>
         </form>
