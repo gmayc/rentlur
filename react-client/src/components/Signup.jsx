@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -40,10 +41,20 @@ class Signup extends React.Component {
   }
 
   handleSubmit(e) {
-    this.props.signup(this.state.username, this.state.password);
+    axios.post('/api/signup', {username: this.state.username, password: this.state.password})
+    .then ((response)=> {
+      if (response.data.name) {
+        alert('username exists!');
+      } else {
+        console.log(response);
+        alert('sign up successful!');
+        this.props.history.push('/login')
+      }
+    })
     e.preventDefault();
-    this.reset();
+    // this.reset();
   }
+
 
   reset () {
     this.setState({
