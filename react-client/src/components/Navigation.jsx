@@ -184,14 +184,14 @@ class Navigation  extends React.Component {
                     <SearchIcon />
                   </div>
                   <form onSubmit={this.handleSubmit} >
-                  <InputBase
-                    placeholder="Search Location..."
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput
-                    }} 
-                    value = {this.state.location} 
-                    onChange = {this.onChange} />
+                    <InputBase
+                      placeholder="Search Location..."
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput
+                      }} 
+                      value = {this.state.location} 
+                      onChange = {this.onChange} />
                     </form>
                 </div>
                 {/* <Button color="inherit">Login</Button> */}

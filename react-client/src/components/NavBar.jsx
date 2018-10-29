@@ -12,10 +12,19 @@ class NavBar extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.userId !== this.props.user) {
+    if (this.state.userId !== this.props.username) {
       console.log('mounting');
       this.setState({
-        userId: this.props.user
+        userId: this.props.username
+      });
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.userId !== this.props.username) {
+      console.log('mounting' , this.state.userId);
+      this.setState({ 
+        userId: this.props.username
       });
     }
   }
