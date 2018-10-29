@@ -135,7 +135,6 @@ class Navigation  extends React.Component {
     console.log(this.state.location)
     this.props.search(this.state.location)
     e.preventDefault();
-    this.setState({submitted: true});
 
   }
 
@@ -150,10 +149,6 @@ class Navigation  extends React.Component {
     render(){
       const {anchorEl} = this.state;
       const {classes} = this.props;
-
-      if (this.state.submitted){
-        return <Redirect to="/"/>
-      }
       return(
 
         <div className={classes.root}>
