@@ -11,6 +11,12 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import NavBar from './components/NavBar.jsx';
 import Details from './components/Details.jsx';
+import Background from './components/Background.jsx';
+import Navigation from './components/Navigation.jsx'
+
+//Material UI
+import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -58,12 +64,7 @@ class App extends React.Component {
     this.deleteFavorite = this.deleteFavorite.bind(this);
   }
  
-  // to be completed later
-  // componentDidMount(savedDetails) {
-  //   this.setState({details: savedDetails});
-  // }
 
-  // requires routes
   searchProperties(searchQuery) {
 
 
@@ -107,7 +108,7 @@ class App extends React.Component {
     });
   }
 
-  
+
 
   addFavorite(property, user_id = this.state.userId) {
     console.log(user_id);
@@ -153,15 +154,17 @@ class App extends React.Component {
     return (
 
       <BrowserRouter>
+
       <div>
-        <NavBar getFavs={this.retrieveFavorites} user={this.state.userId} logout={this.logout}/>
+        {/* <NavBar/> */}
+        <Navigation search={this.searchProperties} username={this.state.username} />
         <div className='main'> 
         <Switch>
           <Route exact path='/' render={(props) => { 
             return (
               <div>
                 <Search {...props} search={this.searchProperties}/>
-                <List {...props} retrieve={this.retrieveDetails} details={this.state.details} rentals={this.state.rentals} fav={this.addFavorite}/>
+                <List {...props} retrieve={this.retrieveDetails} details={this.state.details} rentals={this.state.rentals} fav={this.addFavorite} username={this.state.username}/>
               </div>
             )
           }} />
@@ -169,10 +172,13 @@ class App extends React.Component {
           <Route path='/login' render={(props) => <Login {...props} login={this.login} />}/>
           <Route path='/signup' render={(props) => <Signup {...props} signup={this.signup} />}/>
           <Route path='/details' render={(props) => <Details {...props} details={this.state.details} />}/>
+
         </Switch>
+
         </div>
       </div>
       </BrowserRouter>
+
     );
   }
 }
