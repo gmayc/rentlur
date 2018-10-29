@@ -1,8 +1,8 @@
-var express = require('express');
+const express = require('express');
 const cities = require('all-the-cities');
 const zipcodes = require('zipcodes');
 const craigslist = require('node-craigslist');
-var router = express.Router();
+const router = express.Router();
 
 const craigsList = new craigslist.Client({
   baseHost: 'craigslist.com',

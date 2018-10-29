@@ -25,13 +25,8 @@ class List extends React.Component {
     return (
       <div>
         <h4> List Component </h4>
-        There are
-        {' '}
-        { this.props.rentals.length }
-        {' '}
-    items.
         { this.props.rentals.map((rental, index) => 
-        <ListItem key={index} retrieve={this.props.retrieve} rental={rental} fav={this.props.fav} index={index}/>
+        <ListItem key={index} retrieve={this.props.retrieve} rental={rental} fav={this.props.fav} index={index} username={this.props.username}/>
         )}
       </div>
     )

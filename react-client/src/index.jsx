@@ -97,21 +97,14 @@ class App extends React.Component {
     });
   }
 
-<<<<<<< HEAD
   logout() {
     this.setState({
       username: '',
       userId: 0
     });
-=======
-
-  retrieveFavorites(user_id) {
-    axios.get(`api/properties/${user_id}`)
-    .then(result => this.setState({savedRentals: result.property}))
->>>>>>> Added visual part of material-ui toolbar
   }
 
-  
+
 
   addFavorite(property, user_id = this.state.userId) {
     console.log(user_id);
@@ -160,19 +153,15 @@ class App extends React.Component {
       <BrowserRouter>
 
       <div>
-<<<<<<< HEAD
-        <NavBar getFavs={this.retrieveFavorites} user={this.state.userId} logout={this.logout}/>
-=======
         {/* <NavBar/> */}
-        <Navigation search={this.searchProperties} />
->>>>>>> Added visual part of material-ui toolbar
+        <Navigation search={this.searchProperties} username={this.state.username} />
         <div className='main'> 
         <Switch>
           <Route exact path='/' render={(props) => { 
             return (
               <div>
                 <Search {...props} search={this.searchProperties}/>
-                <List {...props} retrieve={this.retrieveDetails} details={this.state.details} rentals={this.state.rentals} fav={this.addFavorite}/>
+                <List {...props} retrieve={this.retrieveDetails} details={this.state.details} rentals={this.state.rentals} fav={this.addFavorite} username={this.state.username}/>
               </div>
             )
           }} />
@@ -190,7 +179,5 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
 
 ReactDOM.render(<App />, document.getElementById('app'));

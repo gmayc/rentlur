@@ -16,6 +16,8 @@ import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { Icon } from '@material-ui/core';
 import List from '@material-ui/icons/ListAltSharp';
+import Close from '@material-ui/icons/CloseSharp';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 import App from '../index.jsx';
@@ -34,7 +36,7 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 0,
+    marginRight: 5,
   },
   title: {
     display: 'none',
@@ -50,6 +52,7 @@ const styles = theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 100,
+    marginRight: 30,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit,
@@ -92,21 +95,26 @@ class Navigation  extends React.Component {
       search: '',
       anchorEl: null,
       location: '',
+      open: false,
 
     }
     this.handleClick = this.handleClick.bind(this);
-    this.handleClose = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.reset = this.reset.bind(this);
     this.changeState = this.changeState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
+  handleClickAway = () =>{
+    this.setState({open: null});
+  }
   handleClick = e => {
     this.setState({anchorEl: e.currentTarget});
   }
 
   handleClose = () => {
+    console.log("handle close called")
     this.setState({anchorEl: null});
   }
 
@@ -173,7 +181,7 @@ class Navigation  extends React.Component {
                 <div className={classes.grow} />
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
-                    <SearchIcon onClick={this.handleSubmit}/>
+                    <SearchIcon />
                   </div>
                   <form onSubmit={this.handleSubmit} >
                   <InputBase
@@ -187,19 +195,48 @@ class Navigation  extends React.Component {
                     </form>
                 </div>
                 {/* <Button color="inherit">Login</Button> */}
-
-                <IconButton className={classes.Button} color="inherit" aria-label="Menu" component={Link} to="/details">
+              
+                {this.props.username ? 
+                (<IconButton className={classes.Button} color="inherit" aria-label="Menu" component={Link} to="/details">
                   <List/>
-                </IconButton>
+                </IconButton>) : null}
 
-                <IconButton className={classes.Button} color="inherit" aria-label="Menu" component={Link} to="/saved-rentals">
+
+                {this.props.username ?                 
+                (<IconButton className={classes.Button} color="inherit" aria-label="Menu" component={Link} to="/saved-rentals">
                   <CollectionBookmark/>
-                </IconButton>
+                </IconButton>) : null}
+
+                
                 
 
-                <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" component={Link} to="/login">
-                  <AccountCircle />
-                </IconButton>
+                {!this.props.username ?  
+                  (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" component={Link} to="/login">
+                  <AccountCircle 
+                  aria-owns={anchorEl ? 'menu' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleClick}
+                  onClose={this.handleClose}
+                  />
+                </IconButton>) : null}     
+
+                <Menu
+                id='menu'
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={this.handleClose}
+                >
+                <MenuItem onClick={this.handleClose} component={Link} to="/signup">Signup</MenuItem>
+                <MenuItem onClick={this.handleClose} component={Link} to="/login">Login</MenuItem>
+                </Menu>        
+
+
+
+                {this.props.username ?                 
+                (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" component={Link} to="/logout">
+                  <Close />
+                </IconButton> ): null}
+
 
 
 
