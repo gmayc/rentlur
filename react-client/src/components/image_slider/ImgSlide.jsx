@@ -56,8 +56,6 @@ export default class ImgSlide extends React.Component{
         <Arrow direction="right" onClick={this.nextSlide} />
         </Grid>) : null
         }
-
-        
       </Grid>
       </Grid>
   

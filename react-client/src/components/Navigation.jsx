@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import CollectionBookmark from '@material-ui/icons/CollectionsBookmarkOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch , Redirect} from 'react-router-dom';
 import { Icon } from '@material-ui/core';
 import List from '@material-ui/icons/ListAltSharp';
 import Close from '@material-ui/icons/CloseSharp';
@@ -96,6 +96,7 @@ class Navigation  extends React.Component {
       anchorEl: null,
       location: '',
       open: false,
+      submitted: false,
 
     }
     this.handleClick = this.handleClick.bind(this);
@@ -139,6 +140,8 @@ class Navigation  extends React.Component {
     console.log(this.state.location)
     this.props.search(this.state.location)
     e.preventDefault();
+    this.setState({submitted: true});
+
   }
 
   changeState(loc) {
@@ -152,7 +155,11 @@ class Navigation  extends React.Component {
     render(){
       const {anchorEl} = this.state;
       const {classes} = this.props;
+      if (this.state.submitted){
+        return <Redirect to="/"/>
+      }
       return(
+
         <div className={classes.root}>
         <AppBar position="static" >
             <Toolbar>
@@ -183,7 +190,7 @@ class Navigation  extends React.Component {
                   <div className={classes.searchIcon}>
                     <SearchIcon />
                   </div>
-                  <form onSubmit={this.handleSubmit} >
+                  <form onSubmit={this.handleSubmit} component={Link} to="/" >
                   <InputBase
                     placeholder="Search Location..."
                     classes={{
@@ -191,7 +198,9 @@ class Navigation  extends React.Component {
                       input: classes.inputInput
                     }} 
                     value = {this.state.location} 
-                    onChange = {this.onChange} />
+                    onChange = {this.onChange} 
+                    />
+
                     </form>
                 </div>
                 {/* <Button color="inherit">Login</Button> */}
