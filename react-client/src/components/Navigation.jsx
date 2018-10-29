@@ -164,6 +164,7 @@ class Navigation  extends React.Component {
                   <div className={classes.searchIcon}>
                     <SearchIcon />
                   </div>
+
                   <form onSubmit={this.handleSubmit} component={Link} to="/" >
                   <InputBase
                     placeholder="Search Location..."

@@ -44,7 +44,9 @@ class App extends React.Component {
   }
  
   // to be completed later
+
   componentDidMount() {
+    // this.retrieveFavorites();
     this.setState({
       username: sessionStorage.getItem('username') || '',
       userId: sessionStorage.getItem('userId') || 0
@@ -52,9 +54,9 @@ class App extends React.Component {
     this.retrieveFavorites();
   }
 
+
+
   searchProperties(searchQuery) {
-
-
    console.log(searchQuery);
     axios.post('/api/search', {city: searchQuery}).then((response) => {
       this.setState({ rentals: response.data });
@@ -77,18 +79,6 @@ class App extends React.Component {
     })
     .catch((err) => alert('Incorrect username or password'));
   }
-  // signup(usr, pss) {
-  //   axios.post('/api/signup', {username: usr, password: pss})
-  //   .then ((response)=> {
-  //     if (response.data.name) {
-  //       alert('username exists!');
-  //     } else {
-  //       console.log(response);
-  //       alert('sign up successful!');
-  //       return <Link to='/login' > some stuff </Link>
-  //     }
-  //   })
-  // }
 
   logout() {
     this.setState({
@@ -103,7 +93,7 @@ class App extends React.Component {
   addFavorite(property, user_id = sessionStorage.getItem('userId')) {
     console.log(user_id);
     axios.post(`api/properties/${user_id}`, property)
-    .then(result => console.log(result))
+    .then(result => console.log(result));
   }
 
   deleteFavorite(property_id, user_id = sessionStorage.getItem('userId')) {
@@ -146,7 +136,7 @@ class App extends React.Component {
       <BrowserRouter>
 
       <div>
-        {/* <NavBar/> */}
+        {/* <NavBar search={this.searchProperties} username={this.state.username} logout={this.logout}/> */}
         <Navigation search={this.searchProperties} username={this.state.username} logout={this.logout}/>
         <div className='main'> 
         <Switch>

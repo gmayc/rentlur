@@ -2,21 +2,6 @@ import React from 'react';
 import SavedRentalItem from './SavedRentalItem.jsx';
 
 
-// const SavedRentals = (props) => (
-//       <div>
-//         <h1>Saved Rentals</h1>
-//         <ul>
-//           {props.saved.map( (item, index) => (
-//             <li key={index}>
-//               <SavedRentalItem rental={item}/>
-//             </li>
-//             ))
-//           }
-          
-//         </ul>
-//       </div>
-
-// )
 class SavedRentals extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +17,18 @@ class SavedRentals extends React.Component {
       this.setState({
         favs: this.props.saved
       });
+      // this.props.favs();
     }
+  }
+  componentDidMount() {
+    this.props.favs();
+ 
+      console.log('mounting yeahhh');
+      this.setState({
+        favs: this.props.saved
+      });
+      // this.props.favs();
+    
   }
 
   render() {
