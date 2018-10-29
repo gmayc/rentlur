@@ -142,16 +142,35 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' render={(props) => { 
             return (
+
               <div>
-                <Search {...props} search={this.searchProperties}/>
+
+                {/* <Search {...props} search={this.searchProperties}/> */}
                 <List {...props} retrieve={this.retrieveDetails} details={this.state.details} rentals={this.state.rentals} fav={this.addFavorite} username={this.state.username}/>
               </div>
             )
           }} />
-          <Route path='/saved-rentals' render={(props) => <SavedRentals {...props} saved={this.state.savedRentals} favs={this.retrieveFavorites} details={this.retrieveDetails} delete={this.deleteFavorite}/>}/>
-          <Route path='/login' render={(props) => <Login {...props} login={this.login} />}/>
-          <Route path='/signup' render={(props) => <Signup {...props} signup={this.signup} />}/>
-          <Route path='/details' render={(props) => <Details {...props} details={this.state.details} />}/>
+          <Route path='/saved-rentals' 
+            render={(props) => <SavedRentals {...props} 
+            saved={this.state.savedRentals} 
+            favs={this.retrieveFavorites} 
+            details={this.retrieveDetails} 
+            delete={this.deleteFavorite}/>}/>
+          <Route 
+            path='/login' 
+            render={(props) => <Login {...props} 
+            login={this.login} />}
+          />
+          <Route 
+            path='/signup' 
+            render={(props) => <Signup {...props} 
+            signup={this.signup} />}
+            />
+          <Route   
+            path='/details'
+            render={(props) => <Details {...props} 
+            details={this.state.details} />}
+          />
 
         </Switch>
 
