@@ -86,14 +86,18 @@ class App extends React.Component {
     })
     .catch((err) => alert('Incorrect username or password'));
   }
-  signup(usr, pss) {
-    axios.post('/api/signup', {username: usr, password: pss})
-    .then ((response)=> {
-      if (response.data.name) {
-        alert('username exists!');
-      }
-    })
-  }
+  // signup(usr, pss) {
+  //   axios.post('/api/signup', {username: usr, password: pss})
+  //   .then ((response)=> {
+  //     if (response.data.name) {
+  //       alert('username exists!');
+  //     } else {
+  //       console.log(response);
+  //       alert('sign up successful!');
+  //       return <Link to='/login' > some stuff </Link>
+  //     }
+  //   })
+  // }
 
   logout() {
     this.setState({
