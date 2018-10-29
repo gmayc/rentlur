@@ -6,25 +6,15 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import CollectionBookmark from '@material-ui/icons/CollectionsBookmarkOutlined';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { Icon } from '@material-ui/core';
+import { BrowserRouter, Route, Link, Switch , Redirect} from 'react-router-dom';
 import List from '@material-ui/icons/ListAltSharp';
 import Close from '@material-ui/icons/CloseSharp';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-
-import App from '../index.jsx';
-//import List from './List.jsx';
-import Login from './Login.jsx';
-import Signup from './Signup.jsx';
-import SavedRentals from './SavedRentals.jsx';
 
 
 const styles = theme => ({
@@ -95,7 +85,7 @@ class Navigation  extends React.Component {
       search: '',
       anchorEl: null,
       location: '',
-      open: false,
+      submitted: false,
 
     }
     this.handleClick = this.handleClick.bind(this);
@@ -106,6 +96,7 @@ class Navigation  extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  //For login/logout menu
   handleClickAway = () =>{
     this.setState({open: null});
   }
@@ -118,27 +109,33 @@ class Navigation  extends React.Component {
     this.setState({anchorEl: null});
   }
 
+
   changeState(loc) {
     this.setState({
       location: loc
     });
 
   }
+
+ // resets search bar after search
   reset() {
     this.setState({
       location: '',
     });
   }
 
+  //Saves search query
   onChange(e) {
     console.log(e.target.value)
     this.changeState(e.target.value);
   }
 
+  //For Search Bar
   handleSubmit(e) {
     console.log(this.state.location)
     this.props.search(this.state.location)
     e.preventDefault();
+
   }
 
   changeState(loc) {
@@ -153,37 +150,21 @@ class Navigation  extends React.Component {
       const {anchorEl} = this.state;
       const {classes} = this.props;
       return(
+
         <div className={classes.root}>
         <AppBar position="static" >
             <Toolbar>
-              {/* <IconButton  className={classes.menuButton} color="inherit" aria-label="Menu">
-                <MenuIcon 
-                aria-owns={anchorEl ? 'menu' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleClick}
-                />
-              </IconButton>
-              <Menu
-                id='menu'
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={this.handleClose}
-                >
-                <MenuItem onClick={this.handleClose} component={Link} to="/saved-rentals">Saved Properties</MenuItem>
-                <MenuItem onClick={this.handleClose} component={Link} to="/signup">Signup</MenuItem>
-                <MenuItem onClick={this.handleClose} component={Link} to="/login">Login</MenuItem>
-                <MenuItem onClick={this.handleClose} component={Link} to="/details">Details</MenuItem>
-                </Menu> */}
-
                 <Typography variant="h5" className={classes.title} variant="title" color="inherit" component={Link} to="/">
                 Rentlur
                 </Typography>
                 <div className={classes.grow} />
+
+                {/* Search Bar */}
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
                   </div>
-                  <form onSubmit={this.handleSubmit} >
+                  <form onSubmit={this.handleSubmit} component={Link} to="/" >
                   <InputBase
                     placeholder="Search Location..."
                     classes={{
@@ -191,17 +172,19 @@ class Navigation  extends React.Component {
                       input: classes.inputInput
                     }} 
                     value = {this.state.location} 
-                    onChange = {this.onChange} />
+                    onChange = {this.onChange} 
+                    />
+
                     </form>
                 </div>
-                {/* <Button color="inherit">Login</Button> */}
               
+                {/* Details */}
                 {this.props.username ? 
                 (<IconButton className={classes.Button} color="inherit" aria-label="Menu" component={Link} to="/details">
                   <List/>
                 </IconButton>) : null}
 
-
+                {/* Saved-Rentals */}
                 {this.props.username ?                 
                 (<IconButton className={classes.Button} color="inherit" aria-label="Menu" component={Link} to="/saved-rentals">
                   <CollectionBookmark/>
@@ -209,7 +192,7 @@ class Navigation  extends React.Component {
 
                 
                 
-
+                {/* Login */}
                 {!this.props.username ?  
                   (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" component={Link} to="/login">
                   <AccountCircle 
@@ -220,6 +203,8 @@ class Navigation  extends React.Component {
                   />
                 </IconButton>) : null}     
 
+
+                {/* Signup and Login drop down when user not logged in */}
                 <Menu
                 id='menu'
                 anchorEl={anchorEl}
@@ -230,20 +215,11 @@ class Navigation  extends React.Component {
                 <MenuItem onClick={this.handleClose} component={Link} to="/login">Login</MenuItem>
                 </Menu>        
 
-
-
+                {/* Logout */}
                 {this.props.username ?                 
                 (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" component={Link} to="/logout">
                   <Close onClick={this.props.logout}/>
                 </IconButton> ): null}
-
-
-
-
-                        {/* <Route exact path='/' component={App} />
-                <Route path="/saved-rentals" component={SavedRentals}/>
-                <Route path="/signup" component={Signup}/>
-                <Route path="/login" component={Login}/> */}
             </Toolbar>
         </AppBar>
         </div>
