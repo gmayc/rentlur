@@ -21,7 +21,7 @@ const ListItem = (props) => (
       <NavLink to='/details'>Details</NavLink>
     </div>
     {props.username ?     
-    (<button onClick={() => props.fav(props.rental)}>Save to favorites</button>) : null}
+    (<button onClick={() => props.fav(props.rental)}>Save to favs</button>) : null}
 
   </div>
 )
