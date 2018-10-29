@@ -234,7 +234,7 @@ class Navigation  extends React.Component {
 
                 {this.props.username ?                 
                 (<IconButton className={classes.menuButton} color="inherit" aria-label="Menu" component={Link} to="/logout">
-                  <Close />
+                  <Close onClick={this.props.logout}/>
                 </IconButton> ): null}
 
 

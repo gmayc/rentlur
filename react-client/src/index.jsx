@@ -157,7 +157,7 @@ class App extends React.Component {
 
       <div>
         {/* <NavBar/> */}
-        <Navigation search={this.searchProperties} username={this.state.username} />
+        <Navigation search={this.searchProperties} username={this.state.username} logout={this.logout}/>
         <div className='main'> 
         <Switch>
           <Route exact path='/' render={(props) => { 
